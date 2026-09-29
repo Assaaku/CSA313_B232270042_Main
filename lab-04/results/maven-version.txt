@@ -1,0 +1,5 @@
+Apache Maven 3.9.11 (Red Hat 3.9.11-5)
+Maven home: /usr/share/maven
+Java version: 21.0.8, vendor: JetBrains s.r.o., runtime: /home/asaku/android-studio/jbr
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "7.2.5-100.fc43.x86_64", arch: "amd64", family: "unix"
