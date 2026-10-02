@@ -70,10 +70,6 @@ const server = http.createServer((req, res) => {
     if (req.method === 'GET' && url === '/registrations')
       return send(res, 200, registrations);
 
-    // TO REMOVE FOR TESTING POSTMAN
-    if (req.method === 'GET' && url === '/students')
-      return send(res, 200, students);
-    
     send(res, 404, { result: 'ERROR_NOT_FOUND' });
   });
 });
