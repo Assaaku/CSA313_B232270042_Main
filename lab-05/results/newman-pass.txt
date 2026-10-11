@@ -1,0 +1,108 @@
+newman
+
+Lab05 API System Test
+
+❏ 01 - Happy Path
+↳ Setup active student
+  PUT http://localhost:3000/students/L5_HAPPY [200 OK, 178B, 78ms]
+
+↳ Setup course requiring CS201
+  PUT http://localhost:3000/courses/L5_HAPPY_COURSE [200 OK, 178B, 11ms]
+
+↳ Register successfully
+  POST http://localhost:3000/registrations [201 Created, 202B, 6ms]
+  ✓  Status 201
+  ✓  Result is OK
+
+❏ 02 - Student Does Not Exist
+↳ Setup course
+  PUT http://localhost:3000/courses/L5_NO_STUDENT_COURSE [200 OK, 178B, 9ms]
+
+↳ Missing student registration
+  POST http://localhost:3000/registrations [200 OK, 192B, 9ms]
+  ✓  Status 200
+  ✓  Result is ERROR_NO_STUDENT
+
+❏ 03 - Inactive Student
+↳ Setup inactive student
+  PUT http://localhost:3000/students/L5_INACTIVE [200 OK, 178B, 10ms]
+
+↳ Setup course
+  PUT http://localhost:3000/courses/L5_INACTIVE_COURSE [200 OK, 178B, 12ms]
+
+↳ Inactive student registration
+  POST http://localhost:3000/registrations [200 OK, 198B, 8ms]
+  ✓  Status 200
+  ✓  Result is ERROR_INACTIVE_STUDENT
+
+❏ 04 - Course Does Not Exist
+↳ Setup active student
+  PUT http://localhost:3000/students/L5_NO_COURSE [200 OK, 178B, 17ms]
+
+↳ Missing course registration
+  POST http://localhost:3000/registrations [200 OK, 191B, 9ms]
+  ✓  Status 200
+  ✓  Result is ERROR_NO_COURSE
+
+❏ 05 - Missing Prerequisite
+↳ Setup student without CS201
+  PUT http://localhost:3000/students/L5_NO_PREREQ [200 OK, 178B, 7ms]
+
+↳ Setup course requiring CS201
+  PUT http://localhost:3000/courses/L5_NEEDS_CS201 [200 OK, 178B, 5ms]
+
+↳ Register without prerequisite
+  POST http://localhost:3000/registrations [200 OK, 215B, 5ms]
+  ✓  Status 200
+  ✓  Result is ERROR_PREREQUISITES
+
+❏ 06 - No Prerequisites Boundary
+↳ Setup student with no courses
+  PUT http://localhost:3000/students/L5_EMPTY [200 OK, 178B, 7ms]
+
+↳ Setup course with no prerequisites
+  PUT http://localhost:3000/courses/L5_NO_PREREQUISITES [200 OK, 178B, 5ms]
+
+↳ Register for no-prerequisite course
+  POST http://localhost:3000/registrations [201 Created, 202B, 6ms]
+  ✓  Status 201
+  ✓  Result is OK
+
+❏ 07 - Missing Required Field
+↳ Setup student
+  PUT http://localhost:3000/students/L5_BAD_REQUEST [200 OK, 178B, 8ms]
+
+↳ Register without courseID
+  POST http://localhost:3000/registrations [400 Bad Request, 202B, 9ms]
+  ✓  Status 400
+  ✓  Result is ERROR_BAD_REQUEST
+
+❏ 08 - Double Error
+↳ Setup inactive student
+  PUT http://localhost:3000/students/L5_DOUBLE [200 OK, 178B, 6ms]
+
+↳ Inactive student and missing course
+  POST http://localhost:3000/registrations [200 OK, 198B, 5ms]
+  ✓  Status 200
+  ✓  Result is ERROR_INACTIVE_STUDENT
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │               20 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │                8 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │                0 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │               16 │                0 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 739ms                                     │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 457B (approx)                            │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 11ms [min: 5ms, max: 78ms, s.d.: 15ms] │
+└───────────────────────────────────────────────────────────────┘
+exit=0
