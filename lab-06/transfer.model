@@ -1,0 +1,33 @@
+From:       Valid, Frozen, Missing
+To:         Valid, Missing, SameAsFrom
+Amount:     Normal, ExactBalance, NonPositive, OverBalance
+Currency:   Same, Different
+DailyLimit: Enough, Insufficient
+
+# If From itself already determines the result,
+# lower-priority properties use representative normal values.
+IF [From] = "Frozen" THEN [To] = "Valid";
+IF [From] = "Frozen" THEN [Amount] = "Normal";
+IF [From] = "Frozen" THEN [Currency] = "Same";
+IF [From] = "Frozen" THEN [DailyLimit] = "Enough";
+
+IF [From] = "Missing" THEN [To] = "Valid";
+IF [From] = "Missing" THEN [Amount] = "Normal";
+IF [From] = "Missing" THEN [Currency] = "Same";
+IF [From] = "Missing" THEN [DailyLimit] = "Enough";
+
+# Same idea for To errors.
+IF [To] = "Missing" THEN [Amount] = "Normal";
+IF [To] = "Missing" THEN [Currency] = "Same";
+IF [To] = "Missing" THEN [DailyLimit] = "Enough";
+
+IF [To] = "SameAsFrom" THEN [Amount] = "Normal";
+IF [To] = "SameAsFrom" THEN [Currency] = "Same";
+IF [To] = "SameAsFrom" THEN [DailyLimit] = "Enough";
+
+# Amount errors already determine the result.
+IF [Amount] = "NonPositive" THEN [Currency] = "Same";
+IF [Amount] = "NonPositive" THEN [DailyLimit] = "Enough";
+
+IF [Amount] = "OverBalance" THEN [Currency] = "Same";
+IF [Amount] = "OverBalance" THEN [DailyLimit] = "Enough";

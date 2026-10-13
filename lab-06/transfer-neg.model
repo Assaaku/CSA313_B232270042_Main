@@ -1,0 +1,5 @@
+From:       Valid, ~Frozen, ~Missing
+To:         Valid, ~Missing, ~SameAsFrom
+Amount:     Normal, ExactBalance, ~NonPositive, ~OverBalance
+Currency:   Same, Different
+DailyLimit: Enough, ~Insufficient

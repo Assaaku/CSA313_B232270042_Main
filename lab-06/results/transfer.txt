@@ -1,0 +1,11 @@
+From	To	Amount	Currency	DailyLimit
+Valid	Missing	Normal	Same	Enough
+Valid	Valid	ExactBalance	Different	Enough
+Valid	Valid	Normal	Same	Insufficient
+Missing	Valid	Normal	Same	Enough
+Valid	Valid	NonPositive	Same	Enough
+Valid	Valid	ExactBalance	Same	Insufficient
+Valid	SameAsFrom	Normal	Same	Enough
+Valid	Valid	OverBalance	Same	Enough
+Frozen	Valid	Normal	Same	Enough
+Valid	Valid	Normal	Different	Insufficient

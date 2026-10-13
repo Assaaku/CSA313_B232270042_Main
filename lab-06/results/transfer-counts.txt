@@ -1,0 +1,3 @@
+Transfer no constraints: 14
+Transfer constrained: 10
+Transfer negative: 19
