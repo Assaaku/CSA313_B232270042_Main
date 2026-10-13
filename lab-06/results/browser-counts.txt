@@ -1,0 +1,2 @@
+Browser 2-way: 10
+Browser 3-way: 20
