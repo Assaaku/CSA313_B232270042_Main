@@ -1,0 +1,1 @@
+0ae9a28 2026-10-20 21:50:51 +0800 add Lab07 exploratory testing charter
