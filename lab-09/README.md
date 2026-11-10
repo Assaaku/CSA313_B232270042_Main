@@ -342,38 +342,6 @@ Boundary-value тест нэмснээр энэ semantic ялгаа шууд и�
 
 ---
 
-# Git ажлын явц
-
-Лабораторийг дараах үе шатуудаар commit хийсэн:
-
-```text
-5654503  add Lab09 JaCoCo starter
-1268a16  add Lab09 Part A happy path coverage
-ba62e09  added lab09 part b 100 percent branch coverage and cfg diagram from draw.io
-8343b02  add Lab09 Part C loop boundary tests
-c617d7b  add Lab09 boundary tests exposing score 60 defect
-1563b04  fix Lab09 letterGrade boundary: 60 must be D
-```
-
-Ингэснээр:
-
-```text
-Starter
-  ↓
-Happy path
-  ↓
-100% Branch coverage
-  ↓
-Loop boundary
-  ↓
-Boundary defect discovery
-  ↓
-Bug fix
-```
-
-гэсэн ажлын явц Git history-д тусдаа харагдана.
-
----
 
 # Evidence файлууд
 
