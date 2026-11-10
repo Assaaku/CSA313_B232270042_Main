@@ -148,4 +148,32 @@ class ScholarshipCalculatorTest {
                 0,
                 calculator.scholarship(2.9, 20, false));
     }
+
+    @Test
+    void gpaLoopZeroIterations() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> calculator.gpa(new double[]{}));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> calculator.gpa(null));
+    }
+
+    @Test
+    void gpaLoopOneIteration() {
+        assertEquals(
+                4.0,
+                calculator.gpa(new double[]{95}),
+                0.0001);
+    }
+
+    @Test
+    void gpaLoopManyIterations() {
+        assertEquals(
+                2.5,
+                calculator.gpa(
+                        new double[]{95, 85, 75, 65}),
+                0.0001);
+    }
 }
