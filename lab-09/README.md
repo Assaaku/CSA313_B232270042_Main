@@ -85,7 +85,7 @@ Part A-ийн JaCoCo тайланг ашиглан хүрээгүй болон �
 
 Дараа нь `scholarship()` функцын Control Flow Graph буюу CFG-г зурж `cfg.png` файлд хадгалсан.
 
-CFG-ийн decision болон edge-үүд дээр тухайн замаар явж байгаа бодит тестийн методын нэрүүдийг тэмдэглэсэн.
+CFG-ийн decision бүрийн T/F ирмэг дээр тухайн ирмэгийг бодитоор дайрдаг тестийн методын нэрийг тэмдэглэсэн. Жишээлбэл `gpa < 0`-ийн true ирмэгийг `scholarshipInvalidGpaBelowZero`, `credits >= 15`-ийн false ирмэгийг `scholarshipHundredCreditShortfallGets70` тест дайрна.
 
 ![Scholarship CFG](cfg.png)
 
@@ -116,7 +116,7 @@ BRANCH_MISSED=0
 BRANCH_COVERED=41
 LINE_MISSED=0
 LINE_COVERED=25
-```
+`r`
 
 Ингэснээр `ScholarshipCalculator` классын:
 
