@@ -31,4 +31,85 @@ class BonusTest {
                         new int[]{0, 1},
                         2));
     }
+
+    @Test
+    @DisplayName("DU: attendance 31->32(T)")
+    void bonusNullAttendanceThrows() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> DataFlowTargets.bonus(null, 1));
+    }
+
+    @Test
+    @DisplayName(
+        "DU: attendance 31->32(F); threshold 31->32(T)"
+    )
+    void bonusNegativeThresholdThrows() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> DataFlowTargets.bonus(
+                        new int[]{},
+                        -1));
+    }
+
+    @Test
+    @DisplayName(
+        "DU: present 35->50(T); best 37->53(F); "
+        + "score 51->56; attendance 31->38(F)"
+    )
+    void bonusEmptyThresholdZeroGetsFive() {
+        assertEquals(
+                5,
+                DataFlowTargets.bonus(
+                        new int[]{},
+                        0));
+    }
+
+    @Test
+    @DisplayName(
+        "DU: present 35->50(F); score 49->56"
+    )
+    void bonusEmptyThresholdOneGetsZero() {
+        assertEquals(
+                0,
+                DataFlowTargets.bonus(
+                        new int[]{},
+                        1));
+    }
+
+    @Test
+    @DisplayName(
+        "DU: score 51->56; best 43->53(F)"
+    )
+    void bonusOnePresentMeetsThreshold() {
+        assertEquals(
+                5,
+                DataFlowTargets.bonus(
+                        new int[]{1},
+                        1));
+    }
+
+    @Test
+    @DisplayName(
+        "DU: streak 46->41; best 43->42(F)"
+    )
+    void bonusResetMakesBestComparisonFalse() {
+        assertEquals(
+                0,
+                DataFlowTargets.bonus(
+                        new int[]{1, 0, 1},
+                        3));
+    }
+
+    @Test
+    @DisplayName(
+        "DU: score 49->54; score 54->56; best 43->53(T)"
+    )
+    void bonusFivePresentBelowThresholdGetsStreakOnly() {
+        assertEquals(
+                3,
+                DataFlowTargets.bonus(
+                        new int[]{1, 1, 1, 1, 1},
+                        6));
+    }
 }

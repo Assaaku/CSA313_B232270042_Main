@@ -1,0 +1,193 @@
+digraph bonus_cfg {
+    rankdir=TB;
+
+    graph [
+        label="bonus() CFG - DataFlowTargets.java",
+        labelloc=t,
+        fontsize=18
+    ];
+
+    node [
+        shape=box,
+        fontname="Sans",
+        fontsize=10
+    ];
+
+    edge [
+        fontname="Sans",
+        fontsize=8
+    ];
+
+    n31 [
+        shape=oval,
+        label="31: bonus(attendance, threshold)\ndef attendance, threshold"
+    ];
+
+    n32a [
+        shape=diamond,
+        label="32: attendance == null?"
+    ];
+
+    n32b [
+        shape=diamond,
+        label="32: threshold < 0?"
+    ];
+
+    n33 [
+        shape=oval,
+        label="33: throw IllegalArgumentException"
+    ];
+
+    n35 [label="35: present = 0"];
+    n36 [label="36: streak = 0"];
+    n37 [label="37: best = 0"];
+
+    n38c [
+        shape=diamond,
+        label="38: next attendance element?\np-use attendance"
+    ];
+
+    n38d [
+        label="38: a = next element\ndef a"
+    ];
+
+    n39 [
+        shape=diamond,
+        label="39: a > 0?"
+    ];
+
+    n40 [label="40: present = present + 1"];
+    n41 [label="41: streak = streak + 1"];
+
+    n42 [
+        shape=diamond,
+        label="42: streak > best?"
+    ];
+
+    n43 [label="43: best = streak"];
+    n46 [label="46: streak = 0"];
+    n49 [label="49: score = 0"];
+
+    n50 [
+        shape=diamond,
+        label="50: present >= threshold?"
+    ];
+
+    n51 [label="51: score = 5"];
+
+    n53 [
+        shape=diamond,
+        label="53: best >= 5?"
+    ];
+
+    n54 [label="54: score = score + 3"];
+
+    n56 [
+        shape=oval,
+        label="56: return score"
+    ];
+
+    n31 -> n32a [
+        label="bonusNullAttendanceThrows"
+    ];
+
+    n32a -> n33 [
+        label="T\nbonusNullAttendanceThrows"
+    ];
+
+    n32a -> n32b [
+        label="F\nbonusNegativeThresholdThrows"
+    ];
+
+    n32b -> n33 [
+        label="T\nbonusNegativeThresholdThrows"
+    ];
+
+    n32b -> n35 [
+        label="F\nbonusEmptyThresholdZeroGetsFive"
+    ];
+
+    n35 -> n36 [
+        label="bonusEmptyThresholdZeroGetsFive"
+    ];
+
+    n36 -> n37 [
+        label="bonusEmptyThresholdZeroGetsFive"
+    ];
+
+    n37 -> n38c [
+        label="bonusEmptyThresholdZeroGetsFive"
+    ];
+
+    n38c -> n38d [
+        label="T\nallDefsLongStreak"
+    ];
+
+    n38c -> n49 [
+        label="F\nbonusEmptyThresholdZeroGetsFive"
+    ];
+
+    n38d -> n39 [
+        label="allDefsLongStreak"
+    ];
+
+    n39 -> n40 [
+        label="T\nallDefsLongStreak"
+    ];
+
+    n39 -> n46 [
+        label="F\nallDefsResetThenPresent"
+    ];
+
+    n40 -> n41 [
+        label="allDefsLongStreak"
+    ];
+
+    n41 -> n42 [
+        label="allDefsLongStreak"
+    ];
+
+    n42 -> n43 [
+        label="T\nallDefsLongStreak"
+    ];
+
+    n42 -> n38c [
+        label="F\nbonusResetMakesBestComparisonFalse"
+    ];
+
+    n43 -> n38c [
+        label="allDefsLongStreak"
+    ];
+
+    n46 -> n38c [
+        label="allDefsResetThenPresent"
+    ];
+
+    n49 -> n50 [
+        label="bonusEmptyThresholdZeroGetsFive"
+    ];
+
+    n50 -> n51 [
+        label="T\nbonusOnePresentMeetsThreshold"
+    ];
+
+    n50 -> n53 [
+        label="F\nbonusFivePresentBelowThresholdGetsStreakOnly"
+    ];
+
+    n51 -> n53 [
+        label="allDefsLongStreak"
+    ];
+
+    n53 -> n54 [
+        label="T\nallDefsLongStreak"
+    ];
+
+    n53 -> n56 [
+        label="F\nbonusOnePresentMeetsThreshold"
+    ];
+
+    n54 -> n56 [
+        label="allDefsLongStreak"
+    ];
+}
