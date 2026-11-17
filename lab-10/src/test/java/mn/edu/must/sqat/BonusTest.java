@@ -112,4 +112,16 @@ class BonusTest {
                         new int[]{1, 1, 1, 1, 1},
                         6));
     }
+
+    @Test
+    @DisplayName(
+        "M2 kill: present count is 5 but longest streak is only 4"
+    )
+    void bonusSeparatedAttendanceDoesNotEarnFiveDayStreak() {
+        assertEquals(
+                5,
+                DataFlowTargets.bonus(
+                        new int[]{1, 0, 1, 1, 1, 1},
+                        5));
+    }
 }
